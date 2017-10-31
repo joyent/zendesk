@@ -1,5 +1,5 @@
 view: tickets {
-  sql_table_name: looker_zendesk.tickets ;;
+  sql_table_name: stitch_zendesk.tickets ;;
 
   dimension: id {
     primary_key: yes

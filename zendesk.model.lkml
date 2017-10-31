@@ -1,4 +1,4 @@
-connection: "vandelay_looker_connection"
+connection: "joyent"
 
 # include all the views
 include: "*.view"

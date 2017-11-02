@@ -1,6 +1,6 @@
 - dashboard: ticket_submissions
   title: Ticket Submissions
-  layout: tile
+  layout: newspaper
 #   rows:
 #     - elements: [all_tickets, orgs_submitting, avg_tickets_per_org]
 #       height: 150

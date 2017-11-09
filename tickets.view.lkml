@@ -7,10 +7,10 @@ view: tickets {
     sql: ${TABLE}.id ;;
   }
 
-  dimension: assignee_email {
-    description: "the requester is the customer who initiated the ticket. the email is retrieved from the `users` table."
-    sql: ${assignees.email} ;;
-  }
+#   dimension: assignee_email {
+#     description: "the requester is the customer who initiated the ticket. the email is retrieved from the `users` table."
+#     sql: ${assignees.email} ;;
+#   }
 
   ## include only if your Zendesk application utilizes the assignee_id field
   dimension: assignee_id {
@@ -18,11 +18,6 @@ view: tickets {
     value_format_name: id
     sql: ${TABLE}.assignee_id ;;
   }
-
-  #   - dimension: brand_id      ## include only if your Zendesk application utilizes the brand field
-  #     value_format_name: id                ## only associated with Zendesk Enterprise Accounts
-  #     type: number
-  #     sql: ${TABLE}.brand_id
 
   dimension_group: created_at {
     type: time
@@ -42,20 +37,20 @@ view: tickets {
     sql: ${TABLE}.organization_id ;;
   }
 
-  dimension: organization_name {
-    type: string
-    sql: ${organizations.name} ;;
-  }
+  # dimension: organization_name {
+  #   type: string
+  #   sql: ${organizations.name} ;;
+  # }
 
   dimension: recipient {
     type: string
     sql: ${TABLE}.recipient ;;
   }
 
-  dimension: requester_email {
-    description: "the requester is the customer who initiated the ticket. the email is retrieved from the `users` table."
-    sql: ${requesters.email} ;;
-  }
+  # dimension: requester_email {
+  #   description: "the requester is the customer who initiated the ticket. the email is retrieved from the `users` table."
+  #   sql: ${requesters.email} ;;
+  # }
 
   dimension: requester_id {
     description: "the requester is the customer who initiated the ticket"
@@ -63,18 +58,6 @@ view: tickets {
     value_format_name: id
     sql: ${TABLE}.requester_id ;;
   }
-
-  #   - dimension: satisfaction_rating__comment
-  #     type: string
-  #     sql: ${TABLE}.satisfaction_rating__comment
-  #
-  #   - dimension: satisfaction_rating__id
-  #     type: number
-  #     sql: ${TABLE}.satisfaction_rating__id
-  #
-  #   - dimension: satisfaction_rating__score
-  #     type: string
-  #     sql: ${TABLE}.satisfaction_rating__score
 
   dimension: status {
     type: string
@@ -107,7 +90,6 @@ view: tickets {
 
   measure: count {
     type: count
-    drill_fields: [id, requester_email]
   }
 
   # ----- ADDITIONAL FIELDS -----
@@ -184,15 +166,15 @@ view: tickets {
     sql: ${organization_id} ;;
   }
 
-  measure: count_orgs_submitting {
-    type: count_distinct
-    sql: ${organizations.name} ;;
+  # measure: count_orgs_submitting {
+  #   type: count_distinct
+  #   sql: ${organizations.name} ;;
 
-    filters: {
-      field: organization_name
-      value: "-NULL"
-    }
-  }
+  #   filters: {
+  #     field: organization_name
+  #     value: "-NULL"
+  #   }
+  # }
 
   ############ TIME FIELDS ###########
 
@@ -203,27 +185,6 @@ view: tickets {
     sql: ${TABLE}.created_at::timestamp ;;
   }
 }
-
-#   - dimension: created_day_of_week
-#     sql_case:
-#       Sunday:    ${hidden_created_day_of_week_index} = 6
-#       Monday:    ${hidden_created_day_of_week_index} = 0
-#       Tuesday:   ${hidden_created_day_of_week_index} = 1
-#       Wednesday: ${hidden_created_day_of_week_index} = 2
-#       Thursday:  ${hidden_created_day_of_week_index} = 3
-#       Friday:    ${hidden_created_day_of_week_index} = 4
-#       Saturday:  ${hidden_created_day_of_week_index} = 5
-
-### REVIEW
-#   - dimension: satisfaction_rating_percent_tier
-#     type: tier
-#     tiers: [10,20,30,40,50,60,70,80,90]
-#     sql: ${satisfaction_rating}
-#
-#   - measure: average_satisfaction_rating
-#     type: avg
-#     sql: ${satisfaction_rating}
-#     value_format: '#,#00.00%'
 
 
 ### REVIEW BELOW

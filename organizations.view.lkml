@@ -42,4 +42,13 @@ view: organizations {
     type: count
     drill_fields: [id, name]
   }
+  measure: count_orgs_submitting {
+    type: count_distinct
+    sql: ${name} ;;
+
+    filters: {
+      field: name
+      value: "-NULL"
+    }
+  }
 }

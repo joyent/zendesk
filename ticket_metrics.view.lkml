@@ -51,10 +51,10 @@ view: ticket_metrics {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: organization_name {
-    type: string
-    sql: ${tickets.organization_name} ;;
-  }
+#   dimension: organization_name {
+#     type: string
+#     sql: ${organizations.name} ;;
+#   }
 
   # MINUTES
 
